@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="BOLLE brand colour, typography and button specification, read from the live US and UK storefronts (July 2026 reskin). Reference for email template build.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="BOLLE Reskin Colour Spec">
+<meta property="og:description" content="Palette, typography and button specs read off the live US and UK storefronts, with contrast checks.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%BE%3C/text%3E%3C/svg%3E">
+<style>
+  /* baseline reset (supplied by the Artifact runtime; explicit here for standalone hosting) */
+  img, svg, video { max-width: 100%; height: auto; }
+  button { font: inherit; color: inherit; background: none; border: 0; }
+  table { border-spacing: 0; }
+</style>
+<title>BOLLE Reskin Colour Spec</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Montserrat:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --ground: #FAF8F6;
+    --surface: #FFFFFF;
+    --surface-2: #F2EEEA;
+    --ink: #141C24;
+    --ink-mid: #4C5762;
+    --ink-soft: #6E7883;
+    --rule: #E1DAD3;
+    --rule-strong: #C9C0B7;
+    --accent: #7C5F26;
+    --flag: #9A2E1C;
+    --flag-bg: #FBEFEC;
+    --ok: #2C6349;
+    --ok-bg: #EDF4F0;
+    --shadow: 0 1px 2px rgba(20,28,36,.05), 0 8px 24px rgba(20,28,36,.05);
+
+    --measure: 68ch;
+    --pad: clamp(20px, 4vw, 56px);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0C1218;
+      --surface: #141D26;
+      --surface-2: #1B2731;
+      --ink: #EAE6E2;
+      --ink-mid: #A9B3BD;
+      --ink-soft: #8593A0;
+      --rule: #263340;
+      --rule-strong: #38495A;
+      --accent: #D2AD75;
+      --flag: #F0907B;
+      --flag-bg: #2A1A17;
+      --ok: #86C4A5;
+      --ok-bg: #142520;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.28);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #0C1218;
+    --surface: #141D26;
+    --surface-2: #1B2731;
+    --ink: #EAE6E2;
+    --ink-mid: #A9B3BD;
+    --ink-soft: #8593A0;
+    --rule: #263340;
+    --rule-strong: #38495A;
+    --accent: #D2AD75;
+    --flag: #F0907B;
+    --flag-bg: #2A1A17;
+    --ok: #86C4A5;
+    --ok-bg: #142520;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.28);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Archivo, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: var(--pad); }
+
+  /* ---------- masthead ---------- */
+  .masthead { border-bottom: 2px solid var(--ink); padding-bottom: 22px; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 14px;
+  }
+  h1 {
+    font-size: clamp(30px, 5vw, 46px);
+    line-height: 1.08; letter-spacing: -.02em; font-weight: 600;
+    margin: 0 0 14px; text-wrap: balance; max-width: 22ch;
+  }
+  .standfirst { font-size: 17px; color: var(--ink-mid); margin: 0; max-width: var(--measure); }
+
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 6px 28px;
+    margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--rule);
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .meta b { color: var(--ink); font-weight: 500; }
+
+  /* ---------- sections ---------- */
+  section { margin-top: 64px; }
+  h2 {
+    font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+    color: var(--ink); margin: 0 0 6px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--ink);
+    display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  }
+  h2 span {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: .08em; color: var(--ink-soft); text-transform: none;
+    font-weight: 400; flex: none;
+  }
+  h3 {
+    font-size: 15px; font-weight: 600; margin: 34px 0 12px; letter-spacing: -.005em;
+  }
+  p { max-width: var(--measure); color: var(--ink-mid); margin: 14px 0; }
+  p.lead { color: var(--ink); }
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible, .sw:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  code, .mono {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  code {
+    font-size: .88em; background: var(--surface-2); padding: .12em .38em;
+    border-radius: 3px;
+  }
+
+  /* ---------- swatch grid ---------- */
+  .swatches {
+    display: grid; gap: 14px; margin-top: 22px;
+    grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+  }
+  .sw {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 4px;
+    overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column;
+    text-align: left; padding: 0; font: inherit; color: inherit; cursor: pointer;
+  }
+  .chip { height: 82px; border-bottom: 1px solid var(--rule); position: relative; }
+  .chip.checker {
+    background-image:
+      linear-gradient(45deg, rgba(128,128,128,.22) 25%, transparent 25% 75%, rgba(128,128,128,.22) 75%),
+      linear-gradient(45deg, rgba(128,128,128,.22) 25%, transparent 25% 75%, rgba(128,128,128,.22) 75%);
+    background-size: 12px 12px; background-position: 0 0, 6px 6px;
+  }
+  .chip .over { position: absolute; inset: 0; }
+  .sw-body { padding: 11px 13px 13px; display: flex; flex-direction: column; gap: 3px; }
+  .sw-hex {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums;
+    font-size: 14px; font-weight: 500; letter-spacing: .01em;
+  }
+  .sw-name { font-size: 13px; font-weight: 600; }
+  .sw-token {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 10.5px;
+    color: var(--accent); letter-spacing: .01em;
+  }
+  .sw-role { font-size: 12px; color: var(--ink-soft); line-height: 1.45; margin-top: 3px; }
+
+  /* ---------- tables ---------- */
+  .scroll { overflow-x: auto; margin-top: 20px; border: 1px solid var(--rule); border-radius: 4px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 520px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  thead th {
+    font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--ink-soft); font-weight: 600; background: var(--surface-2);
+    border-bottom: 1px solid var(--rule-strong); white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.num { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .dot { display: inline-block; width: 11px; height: 11px; border-radius: 2px; margin-right: 7px; vertical-align: -1px; border: 1px solid rgba(128,128,128,.35); }
+
+  .pill {
+    display: inline-block; font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 3px; white-space: nowrap;
+  }
+  .pill.pass { background: var(--ok-bg); color: var(--ok); border: 1px solid currentColor; }
+  .pill.fail { background: var(--flag-bg); color: var(--flag); border: 1px solid currentColor; }
+
+  /* ---------- specimen / demo panels ---------- */
+  .panel {
+    margin-top: 20px; border: 1px solid var(--rule); border-radius: 4px;
+    background: var(--surface); padding: 24px; box-shadow: var(--shadow);
+  }
+  .panel-label {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 10.5px;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft);
+    margin: 0 0 14px;
+  }
+  .spec-serif {
+    font-family: Georgia, "Times New Roman", serif; font-weight: 400;
+    color: var(--ink); margin: 0; line-height: 1.12; letter-spacing: .04em;
+    font-size: clamp(28px, 4.4vw, 44px);
+  }
+  .spec-sans {
+    font-family: Montserrat, Arial, sans-serif; color: var(--ink-mid);
+    margin: 12px 0 0; font-size: 14px; line-height: 1.7; max-width: 58ch;
+  }
+  .spec-ui {
+    font-family: Montserrat, Arial, sans-serif; font-weight: 500; font-size: 13px;
+    text-transform: uppercase; letter-spacing: 1px; color: var(--ink); margin: 16px 0 0;
+  }
+
+  /* live button samples — always on brand ground, single-theme by design */
+  .btn-stage {
+    display: flex; flex-wrap: wrap; gap: 26px; align-items: flex-start;
+    padding: 30px 26px; border-radius: 4px; margin-top: 20px;
+    background: #111820; border: 1px solid var(--rule);
+  }
+  .btn-stage.light { background: #FFF9F5; }
+  .btn-cell { display: flex; flex-direction: column; gap: 9px; }
+  .btn-cap {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 10px;
+    letter-spacing: .08em; text-transform: uppercase; color: rgba(255,249,245,.6);
+  }
+  .btn-stage.light .btn-cap { color: rgba(17,24,32,.55); }
+  .b {
+    font-family: Montserrat, Arial, sans-serif; font-weight: 600; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 1.2px; padding: 13px 22px;
+    border-radius: 8px; border: 0; display: inline-block; text-align: center;
+  }
+  .b-primary  { background: linear-gradient(135deg, #927133 0%, #6B4F26 100%); color: #FFFFFF; }
+  .b-flat     { background: #7C5F26; color: #FFF9F5; }
+  .b-ghost    { background: #111820; color: #FFF9F5; border: 1px solid rgba(210,173,117,.6); }
+  .b-news     { background: #D2AD75; color: #111820; }
+
+  /* ---------- findings ---------- */
+  .findings { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 2px; }
+  .findings li {
+    display: grid; grid-template-columns: 30px 1fr; gap: 14px;
+    background: var(--surface); border: 1px solid var(--rule);
+    padding: 15px 17px; align-items: start;
+  }
+  .findings li + li { border-top: 0; }
+  .findings li:first-child { border-radius: 4px 4px 0 0; }
+  .findings li:last-child { border-radius: 0 0 4px 4px; }
+  .fnum {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px;
+    color: var(--flag); font-weight: 500; padding-top: 1px;
+  }
+  .findings h4 { margin: 0 0 5px; font-size: 14px; font-weight: 600; }
+  .findings p { margin: 0; font-size: 13.5px; max-width: 74ch; }
+  .fix {
+    margin-top: 8px; font-size: 13px; color: var(--ink);
+    padding-left: 11px; border-left: 2px solid var(--ok);
+  }
+  .fix b { font-weight: 600; }
+
+  /* ---------- before/after ---------- */
+  .ba { display: grid; gap: 0; margin-top: 22px; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+  .ba-row { display: grid; grid-template-columns: minmax(120px, 1fr) minmax(0, 1.5fr) minmax(0, 1.5fr); border-bottom: 1px solid var(--rule); background: var(--surface); }
+  .ba-row:last-child { border-bottom: 0; }
+  .ba-row.head { background: var(--surface-2); }
+  .ba-row.head > div {
+    font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--ink-soft); font-weight: 600;
+  }
+  .ba-row > div { padding: 12px 15px; font-size: 13.5px; border-left: 1px solid var(--rule); }
+  .ba-row > div:first-child { border-left: 0; font-weight: 600; font-size: 13px; }
+  .ba-row .was { color: var(--ink-soft); }
+  @media (max-width: 720px) {
+    .ba-row { grid-template-columns: 1fr; }
+    .ba-row > div { border-left: 0; }
+    .ba-row.head { display: none; }
+    .ba-row > div:first-child { padding-bottom: 2px; }
+  }
+
+  footer {
+    margin-top: 72px; padding-top: 22px; border-top: 1px solid var(--rule);
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11.5px;
+    color: var(--ink-soft);
+  }
+  footer p { max-width: 76ch; color: var(--ink-soft); font-size: 11.5px; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%) translateY(14px);
+    background: var(--ink); color: var(--ground); padding: 8px 15px; border-radius: 4px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px;
+    opacity: 0; pointer-events: none; transition: opacity .18s ease, transform .18s ease;
+  }
+  .toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+  @media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Brand reference — for email build</p>
+    <h1>BOLLE Reskin Colour Spec</h1>
+    <p class="standfirst">Every colour, type and button value read straight off the live US and UK storefronts, so the Klaviyo flows match the site rather than approximating it.</p>
+    <div class="meta">
+      <span>Pulled <b>26 Aug 2026</b></span>
+      <span>Live theme <b>Michelle's July 2026 Reskin</b></span>
+      <span>Sources <b>bolledrinks.com</b> · <b>bolledrinks.co.uk</b></span>
+      <span>For <b>Austen</b> — email flows</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>The short version <span>read this first</span></h2>
+    <p class="lead">The reskin replaced a single olive-brass accent with a proper gold scale, and turned an all-dark site into one that alternates dark ink with warm cream. US and UK are colour-identical — one palette covers both.</p>
+    <p>For email, four values do most of the work: ink <code>#111820</code>, cream <code>#FFF9F5</code>, gold <code>#7C5F26</code> for buttons, and light gold <code>#D2AD75</code> for small accents. Georgia for headings, Montserrat (falling back to Arial) for everything else.</p>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Role in an email</th><th>Value</th><th>Notes for the build</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Dark background / footer</td><td class="num"><span class="dot" style="background:#111820"></span>#111820</td><td>Site background and footer. Body copy on it is cream.</td></tr>
+          <tr><td>Light background / body</td><td class="num"><span class="dot" style="background:#FFF9F5"></span>#FFF9F5</td><td>The default light surface. Not pure white — pure white reads cold next to it.</td></tr>
+          <tr><td>Primary button fill</td><td class="num"><span class="dot" style="background:#7C5F26"></span>#7C5F26</td><td>Flat gold. Use this, not the gradient — Outlook drops CSS gradients.</td></tr>
+          <tr><td>Primary button label</td><td class="num"><span class="dot" style="background:#FFF9F5"></span>#FFF9F5</td><td>Cream, matching the PDP add-to-cart button.</td></tr>
+          <tr><td>Body text on light</td><td class="num"><span class="dot" style="background:#111820"></span>#111820</td><td>Ink at full strength; 65% opacity for secondary lines.</td></tr>
+          <tr><td>Body text on dark</td><td class="num"><span class="dot" style="background:#FFF9F5"></span>#FFF9F5</td><td>Cream; <code>rgba(255,249,245,.7)</code> for secondary.</td></tr>
+          <tr><td>Small accents, badges</td><td class="num"><span class="dot" style="background:#D2AD75"></span>#D2AD75</td><td>Light gold. Always pair with ink text, never white.</td></tr>
+          <tr><td>Hairline rules on dark</td><td class="num"><span class="dot" style="background:#8f9296"></span>rgba(255,249,245,.2)</td><td>Flatten to <code>#3D444B</code> on <code>#111820</code> if you need a solid hex.</td></tr>
+          <tr><td>Heading face</td><td class="num">Georgia, serif</td><td>System serif, safe everywhere including Outlook. No webfont needed.</td></tr>
+          <tr><td>Body face</td><td class="num">Montserrat, Arial</td><td>Arial fallback is what the site itself declares.</td></tr>
+          <tr><td>Button radius</td><td class="num">8px</td><td>Use a rounded-corner VML fallback or accept square corners in Outlook.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Core palette <span>8 values</span></h2>
+    <p>These are the surfaces and text colours. Everything named <code>--bolle-*</code> is a real token in the live theme, so Austen and the site are speaking the same language.</p>
+
+    <div class="swatches">
+      <button class="sw" data-hex="#111820">
+        <span class="chip" style="background:#111820"></span>
+        <span class="sw-body">
+          <span class="sw-hex">#111820</span>
+          <span class="sw-name">Ink</span>
+          <span class="sw-token">--bolle-bg</span>
+          <span class="sw-role">Page background, footer, dark sections, secondary button fill. rgb(17, 24, 32)</span>
+        </span>
+      </button>
+      <button class="sw" data-hex="#1A222C">
+        <span class="chip" style="background:#1A222C"></span>
+        <span class="sw-body">
+          <span class="sw-hex">#1A222C</span>
+          <span class="sw-name">Ink panel</span>
+          <span class="sw-token">no token</span>
+          <span class="sw-role">Raised cards and panels sitting on ink. rgb(26, 34, 44)</span>
+        </span>
+      </button>
+      <button class="sw" data-hex="#FFF9F5">
+        <span class="chip" style="background:#FFF9F5"></span>
+        <span class="sw-body">
+          <span class="sw-hex">#FFF9F5</span>
+          <span class="sw-name">Cream</span>
+          <span class="sw-token">--bolle-fg / --bolle-ctl-ink</span>
+          <span class="sw-role">Light section backgrounds, and all text on dark. rgb(255, 249, 245)</span>
+        </span>
+      </button>
+      <button class="sw" data-hex="#F8F8F8">
+        <span class="chip" style="background:#F8F8F8"></span>
+        <span class="sw-body">
+          <span class="sw-hex">#F8F8F8</span>
+          <span class="sw-name">Grey white</span>
+          <span class="sw-token">no token</span>
+          <span class="sw-role">Collection intro band on the homepage. rgb(248, 248, 248)</span>
+        </span>
+      </button>
+      <button class="sw" data-hex="#F5F0EA">
+        <span class="chip" style="background:#F5F0EA"></span>
+        <span class="sw-body">
+          <span class="sw-hex">#F5F0EA</span>
+          <span class="sw-name">Warm stone</span>
+          <span class="sw-token">no token</span>
+          <span class="sw-role">Secondary light surface, picks up the bottle-shoot backdrop. rgb(245, 240, 234)</span>
+        </span>
+      </button>
+      <button class="sw" data-hex="#2A231C">
+        <span class="chip" style="background:#2A231C"></span>
+        <span class="sw-body">
+          <span class="sw-hex">#2A231C</span>
+          <span class="sw-name">Menu brown</span>
+          <span class="sw-token">no token</span>
+          <span class="sw-role">Dropdown menu links only — a warmer ink than #111820. rgb(42, 35, 28)</span>
+        </span>
+      </button>
+      <button class="sw" data-hex="#FFFFFF">
+        <span class="chip" style="background:#FFFFFF"></span>
+        <span class="sw-body">
+          <span class="sw-hex">#FFFFFF</span>
+          <span class="sw-name">White</span>
+          <span class="sw-token">no token</span>
+          <span class="sw-role">Form inputs, and the label on gradient buttons. rgb(255, 255, 255)</span>
+        </span>
+      </button>
+      <button class="sw" data-hex="rgba(255,249,245,0.2)">
+        <span class="chip checker"><span class="over" style="background:rgba(255,249,245,0.2)"></span></span>
+        <span class="sw-body">
+          <span class="sw-hex">255,249,245 / .2</span>
+          <span class="sw-name">Hairline</span>
+          <span class="sw-token">--bolle-border</span>
+          <span class="sw-role">Dividers on dark. Solid equivalent over ink: #3D444B</span>
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Gold system <span>the reskin's headline change</span></h2>
+    <p>The old site had one gold. The reskin has a scale plus two gradients — a deep one for buttons and a pale one for decorative fills. Email should use the flat <code>#7C5F26</code>; the gradients are web-only.</p>
+
+    <div class="swatches">
+      <button class="sw" data-hex="#7C5F26">
+        <span class="chip" style="background:#7C5F26"></span>
+        <span class="sw-body">
+          <span class="sw-hex">#7C5F26</span>
+          <span class="sw-name">Gold — base</span>
+          <span class="sw-token">--bolle-gold</span>
+          <span class="sw-role">The canonical gold. Flat CTA fill on product pages, and the fallback under every gradient. rgb(124, 95, 38)</span>
+        </span>
+      </button>
+      <button class="sw" data-hex="#927133">
+        <span class="chip" style="background:#927133"></span>
+        <span class="sw-body">
+          <span class="sw-hex">#927133</span>
+          <span class="sw-name">Gold — deep 1</span>
+          <span class="sw-token">--bolle-gold-deep-1</span>
+          <span class="sw-role">Light end of the button gradient. rgb(146, 113, 51)</span>
+        </span>
+      </button>
+      <button class="sw" data-hex="#6B4F26">
+        <span class="chip" style="background:#6B4F26"></span>
+        <span class="sw-body">
+          <span class="sw-hex">#6B4F26</span>
+          <span class="sw-name">Gold — deep 2</span>
+          <span class="sw-token">--bolle-gold-deep-2</span>
+          <span class="sw-role">Dark end of the button gradient. rgb(107, 79, 38)</span>
+        </span>
+      </button>
+      <button class="sw" data-hex="#D2AD75">
+        <span class="chip" style="background:#D2AD75"></span>
+        <span class="sw-body">
+          <span class="sw-hex">#D2AD75</span>
+          <span class="sw-name">Gold — light</span>
+          <span class="sw-token">no token</span>
+          <span class="sw-role">Footer Subscribe button, cart count badge, ghost-button border at 60%. rgb(210, 173, 117)</span>
+        </span>
+      </button>
+      <button class="sw" data-hex="#EFDCBD">
+        <span class="chip" style="background:#EFDCBD"></span>
+        <span class="sw-body">
+          <span class="sw-hex">#EFDCBD</span>
+          <span class="sw-name">Gold — pale</span>
+          <span class="sw-token">--bolle-gold-pale-1</span>
+          <span class="sw-role">Light end of the pale gradient. Reads well as gold text on ink. rgb(239, 220, 189)</span>
+        </span>
+      </button>
+      <button class="sw" data-hex="#9D7B3A">
+        <span class="chip" style="background:#9D7B3A"></span>
+        <span class="sw-body">
+          <span class="sw-hex">#9D7B3A</span>
+          <span class="sw-name">Gold — mid</span>
+          <span class="sw-token">--bolle-gold-pale-2</span>
+          <span class="sw-role">Dark end of the pale gradient. rgb(157, 123, 58)</span>
+        </span>
+      </button>
+      <button class="sw" data-hex="linear-gradient(135deg, #927133 0%, #6B4F26 100%)">
+        <span class="chip" style="background:linear-gradient(135deg,#927133 0%,#6B4F26 100%)"></span>
+        <span class="sw-body">
+          <span class="sw-hex">135° 927133 → 6B4F26</span>
+          <span class="sw-name">Gold fill — deep</span>
+          <span class="sw-token">--bolle-gold-fill-deep</span>
+          <span class="sw-role">Primary CTA on hero and homepage cards. Web only.</span>
+        </span>
+      </button>
+      <button class="sw" data-hex="linear-gradient(135deg, #EFDCBD 0%, #9D7B3A 100%)">
+        <span class="chip" style="background:linear-gradient(135deg,#EFDCBD 0%,#9D7B3A 100%)"></span>
+        <span class="sw-body">
+          <span class="sw-hex">135° EFDCBD → 9D7B3A</span>
+          <span class="sw-name">Gold fill — pale</span>
+          <span class="sw-token">--bolle-gold-fill-pale</span>
+          <span class="sw-role">Decorative fills and rules. Web only.</span>
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Typography <span>as it actually renders</span></h2>
+    <p>Worth knowing: the only webfont the live site loads is Montserrat. Headings use plain Georgia, which is a gift for email — no font-loading fallback to design around.</p>
+
+    <div class="panel">
+      <p class="panel-label">Heading — Georgia, serif · 400 · letter-spacing .04em</p>
+      <p class="spec-serif">The World's Finest Non-Alcoholic Wine</p>
+      <p class="spec-sans">Body — Montserrat, Arial, sans-serif · 400 · 14px / 1.7. The only non-alcoholic wine in the world to be twice fermented, including fermentation after dealcoholisation.</p>
+      <p class="spec-ui">Nav &amp; labels — Montserrat 500 · 13px · uppercase · 1px</p>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Role</th><th>Stack</th><th>Weight</th><th>Size</th><th>Tracking</th><th>Case</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Page heading</td><td class="num">Georgia, serif</td><td class="num">400</td><td class="num">47px</td><td class="num">1.88px</td><td>Sentence</td></tr>
+          <tr><td>Section heading</td><td class="num">Georgia, serif</td><td class="num">400</td><td class="num">32–38px</td><td class="num">normal</td><td>Sentence</td></tr>
+          <tr><td>Card heading</td><td class="num">Georgia, serif</td><td class="num">500</td><td class="num">20px</td><td class="num">normal</td><td>Sentence</td></tr>
+          <tr><td>Body copy</td><td class="num">Montserrat, Arial</td><td class="num">400</td><td class="num">14px</td><td class="num">normal</td><td>Sentence</td></tr>
+          <tr><td>Nav link</td><td class="num">Montserrat, Arial</td><td class="num">500</td><td class="num">13px</td><td class="num">1px</td><td>Uppercase</td></tr>
+          <tr><td>Button label</td><td class="num">Montserrat, Arial</td><td class="num">600</td><td class="num">12px</td><td class="num">1.2px</td><td>Uppercase</td></tr>
+          <tr><td>Eyebrow label</td><td class="num">Montserrat, Arial</td><td class="num">500</td><td class="num">12px</td><td class="num">1.6px</td><td>Uppercase</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Buttons <span>live samples</span></h2>
+    <p>These are rendered from the site's own values, on the site's own grounds. The gradient primary and the flat primary are the same button in two different places — see finding 1.</p>
+
+    <div class="btn-stage">
+      <span class="btn-cell">
+        <span class="btn-cap">Primary — gradient (hero, home)</span>
+        <span class="b b-primary">Buy Now</span>
+      </span>
+      <span class="btn-cell">
+        <span class="btn-cap">Primary — flat (product page)</span>
+        <span class="b b-flat">Add to Cart</span>
+      </span>
+      <span class="btn-cell">
+        <span class="btn-cap">Secondary — ghost</span>
+        <span class="b b-ghost">Switch to UK/EU</span>
+      </span>
+      <span class="btn-cell">
+        <span class="btn-cap">Newsletter (footer)</span>
+        <span class="b b-news">Subscribe</span>
+      </span>
+    </div>
+
+    <div class="btn-stage light">
+      <span class="btn-cell">
+        <span class="btn-cap">Primary on cream</span>
+        <span class="b b-primary">Discover the Range</span>
+      </span>
+      <span class="btn-cell">
+        <span class="btn-cap">Flat primary on cream</span>
+        <span class="b b-flat">Build a Case</span>
+      </span>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Variant</th><th>Fill</th><th>Label</th><th>Border</th><th>Radius</th><th>Padding</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Primary (web)</td><td class="num">135° #927133 → #6B4F26</td><td class="num">#FFFFFF</td><td>none</td><td class="num">8px</td><td class="num">13px 20px</td></tr>
+          <tr><td>Primary (email)</td><td class="num">#7C5F26</td><td class="num">#FFF9F5</td><td>none</td><td class="num">8px</td><td class="num">13px 20px</td></tr>
+          <tr><td>Secondary / ghost</td><td class="num">#111820</td><td class="num">#FFF9F5</td><td class="num">1px rgba(210,173,117,.6)</td><td class="num">8px</td><td class="num">13px 20px</td></tr>
+          <tr><td>Newsletter</td><td class="num">#D2AD75</td><td class="num">#111820</td><td>none</td><td class="num">8px</td><td class="num">12px 18px</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Contrast check <span>WCAG AA</span></h2>
+    <p>All the pairings the site actually uses, plus the two that fail. Email clients don't enforce this, but Gmail's dark mode and accessibility complaints both do.</p>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Text on background</th><th>Ratio</th><th>Body 4.5:1</th><th>Large 3:1</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="dot" style="background:#FFF9F5"></span>Cream on ink #111820</td><td class="num">17.12</td><td><span class="pill pass">Pass</span></td><td><span class="pill pass">Pass</span></td></tr>
+          <tr><td><span class="dot" style="background:#111820"></span>Ink on cream #FFF9F5</td><td class="num">17.12</td><td><span class="pill pass">Pass</span></td><td><span class="pill pass">Pass</span></td></tr>
+          <tr><td><span class="dot" style="background:#FFF9F5"></span>Cream on ink panel #1A222C</td><td class="num">15.37</td><td><span class="pill pass">Pass</span></td><td><span class="pill pass">Pass</span></td></tr>
+          <tr><td><span class="dot" style="background:#2A231C"></span>Menu brown on cream</td><td class="num">14.84</td><td><span class="pill pass">Pass</span></td><td><span class="pill pass">Pass</span></td></tr>
+          <tr><td><span class="dot" style="background:#EFDCBD"></span>Pale gold on ink</td><td class="num">13.31</td><td><span class="pill pass">Pass</span></td><td><span class="pill pass">Pass</span></td></tr>
+          <tr><td><span class="dot" style="background:#D2AD75"></span>Light gold on ink</td><td class="num">8.49</td><td><span class="pill pass">Pass</span></td><td><span class="pill pass">Pass</span></td></tr>
+          <tr><td><span class="dot" style="background:#111820"></span>Ink on light gold #D2AD75</td><td class="num">8.49</td><td><span class="pill pass">Pass</span></td><td><span class="pill pass">Pass</span></td></tr>
+          <tr><td><span class="dot" style="background:#FFFFFF"></span>White on gold base #7C5F26</td><td class="num">5.96</td><td><span class="pill pass">Pass</span></td><td><span class="pill pass">Pass</span></td></tr>
+          <tr><td><span class="dot" style="background:#FFF9F5"></span>Cream on gold base #7C5F26</td><td class="num">5.71</td><td><span class="pill pass">Pass</span></td><td><span class="pill pass">Pass</span></td></tr>
+          <tr><td><span class="dot" style="background:#FFFFFF"></span>White on gradient light end #927133</td><td class="num">4.53</td><td><span class="pill pass">Pass</span></td><td><span class="pill pass">Pass</span></td></tr>
+          <tr><td><span class="dot" style="background:#7C5F26"></span>Gold base as text on ink</td><td class="num">3.00</td><td><span class="pill fail">Fail</span></td><td><span class="pill pass">Pass</span></td></tr>
+          <tr><td><span class="dot" style="background:#FFFFFF"></span>White on light gold #D2AD75</td><td class="num">2.11</td><td><span class="pill fail">Fail</span></td><td><span class="pill fail">Fail</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Loose ends worth settling <span>before the flows are built</span></h2>
+    <p>None of these break the site, but each one gives Austen a different answer to "what does a BOLLE button look like". Settling them now means the emails match whichever answer you pick.</p>
+
+    <ol class="findings">
+      <li>
+        <span class="fnum">01</span>
+        <div>
+          <h4>The primary button has three different looks</h4>
+          <p>The hero uses the gold gradient with white Georgia at 2.8px tracking. Homepage cards use the same gradient with white <em>Assistant</em> at 12px. Product pages use flat <code>#7C5F26</code> with cream Montserrat. Same button, three treatments.</p>
+          <p class="fix"><b>Suggested canonical:</b> flat <code>#7C5F26</code>, label <code>#FFF9F5</code>, Montserrat 600 / 12px / uppercase / 1.2px, 8px radius, 13×20px padding — the product-page version. It's the one that converts, it survives Outlook, and it's the easiest to reproduce in Klaviyo.</p>
+        </div>
+      </li>
+      <li>
+        <span class="fnum">02</span>
+        <div>
+          <h4>The footer Subscribe button is a fourth look</h4>
+          <p>It's <code>#D2AD75</code> with an ink label — noticeably lighter than every other CTA on the site, and <code>#D2AD75</code> isn't in the <code>--bolle-*</code> token set at all despite also being used for the cart badge and ghost-button borders.</p>
+          <p class="fix"><b>Either</b> promote <code>#D2AD75</code> to a real token as the light-gold accent, <b>or</b> bring the Subscribe button onto <code>#7C5F26</code>. Since email is mostly signup and nurture CTAs, this one matters for Austen.</p>
+        </div>
+      </li>
+      <li>
+        <span class="fnum">03</span>
+        <div>
+          <h4>The Klaviyo signup popup matches neither site</h4>
+          <p>The "Join the Club" form renders on champagne <code>#E5D4B8</code> in Poppins — a colour and a typeface that appear nowhere else in the reskin.</p>
+          <p class="fix"><b>Quick win:</b> this is a Klaviyo-side fix, so it's already Austen's territory. Move it to cream <code>#FFF9F5</code> with Georgia headings and a <code>#7C5F26</code> button and the whole signup-to-welcome journey lines up.</p>
+        </div>
+      </li>
+      <li>
+        <span class="fnum">04</span>
+        <div>
+          <h4>A stray webfont is loading</h4>
+          <p><em>Assistant</em> is fetched and applied to six elements, and font-faces for Marcellus, Playfair Display and Work Sans are declared but never used. Leftovers from the previous theme or an app.</p>
+          <p class="fix"><b>Fix:</b> point those six elements at Montserrat and drop the unused faces. Faster page, and the type system becomes two faces you can state in one line.</p>
+        </div>
+      </li>
+      <li>
+        <span class="fnum">05</span>
+        <div>
+          <h4>Two contrast traps to avoid in email</h4>
+          <p>White text on light gold <code>#D2AD75</code> is 2.11:1 — unreadable. Gold <code>#7C5F26</code> as text on ink is 3.0:1, fine at display size but not for body copy.</p>
+          <p class="fix"><b>Rules of thumb:</b> on <code>#D2AD75</code> always use ink <code>#111820</code>. For gold text on dark, use <code>#D2AD75</code> (8.49:1) or <code>#EFDCBD</code> (13.31:1) instead of the base gold.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>What the reskin changed <span>April 2026 → live</span></h2>
+    <p>Compared against an archived capture of the US homepage from 23 April 2026, before the July theme went live. This is the context Austen needs for why the old email templates will look wrong.</p>
+
+    <div class="ba">
+      <div class="ba-row head"><div>Element</div><div>Before</div><div>Now</div></div>
+      <div class="ba-row">
+        <div>Accent colour</div>
+        <div class="was"><span class="dot" style="background:#887711"></span>One olive-brass gold, <code>#887711</code></div>
+        <div><span class="dot" style="background:#7C5F26"></span>A six-stop gold scale plus two gradients</div>
+      </div>
+      <div class="ba-row">
+        <div>Overall ground</div>
+        <div class="was">All-dark throughout — ink <code>#111820</code> with panels in <code>#1A2332</code></div>
+        <div>Alternating dark ink and warm cream (<code>#FFF9F5</code>, <code>#F8F8F8</code>, <code>#F5F0EA</code>)</div>
+      </div>
+      <div class="ba-row">
+        <div>Panel colour</div>
+        <div class="was"><span class="dot" style="background:#1A2332"></span>#1A2332 — cooler, bluer</div>
+        <div><span class="dot" style="background:#1A222C"></span>#1A222C — slightly warmer</div>
+      </div>
+      <div class="ba-row">
+        <div>Buttons</div>
+        <div class="was">Fully rounded pill, flat olive fill</div>
+        <div>8px radius, gold gradient or flat gold, uppercase with tracking</div>
+      </div>
+      <div class="ba-row">
+        <div>Corner radius</div>
+        <div class="was">One global 14px</div>
+        <div>Dedicated 8px button radius token</div>
+      </div>
+      <div class="ba-row">
+        <div>Navigation</div>
+        <div class="was">Hamburger menu; trade CTA read "Ready to stock BOLLE?"</div>
+        <div>Full horizontal nav — Shop, Learn, Find, Contact — plus "Trade Enquiries" and a region-switch pill</div>
+      </div>
+      <div class="ba-row">
+        <div>Design tokens</div>
+        <div class="was">9 <code>--bolle-*</code> variables</div>
+        <div>20 — gold scale, gradients, button radius, control fills</div>
+      </div>
+      <div class="ba-row">
+        <div>Homepage structure</div>
+        <div class="was">Hero, press quote, older section set</div>
+        <div>Rebuilt: full-bleed hero, "poured at" strip, collection intro, collection showcase, newcomer callout, founder story, Instagram feed, journal feed, FAQs</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>US vs UK <span>colour-identical</span></h2>
+    <p>Good news for Austen: one palette, one type system, one button spec covers both regions. The only divergences are structural.</p>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>&nbsp;</th><th>bolledrinks.com (US)</th><th>bolledrinks.co.uk (UK)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Palette</td><td colspan="2">Identical — same 20 tokens, same section backgrounds, same button values</td></tr>
+          <tr><td>Typography</td><td colspan="2">Identical — Georgia headings, Montserrat body</td></tr>
+          <tr><td>Theme name</td><td>Michelle's July 2026 Reskin USA</td><td>Michelle's July 2026 Reskin</td></tr>
+          <tr><td>Stray token</td><td class="num">--bolle-chrome-h: 86px</td><td class="num">--bolle-radius: 14px <em>(legacy)</em></td></tr>
+          <tr><td>Cookie banner</td><td>None</td><td>Present, with its own styling outside the token set</td></tr>
+          <tr><td>"Poured at" strip</td><td class="num">hero_poured_at_strip</td><td class="num">july2026_home_poured_at <em>(newer variant)</em></td></tr>
+          <tr><td>Region switch</td><td>"Switch to UK/EU"</td><td>"Switch to US"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Two things to look at separately</h3>
+    <p>The UK "poured at" strip is listing US venues — San Francisco and Sonoma appear on bolledrinks.co.uk. And the UK carries a legacy <code>--bolle-radius: 14px</code> token from the old theme while the US carries <code>--bolle-chrome-h</code>; neither site has both. Harmless, but they'll drift further apart with each edit.</p>
+  </section>
+
+  <footer>
+    <p>Values read from the rendered DOM of both live storefronts on 26 August 2026 — computed styles, not design files, so this is what customers actually see. Before/after comparison taken from an Internet Archive capture of the US homepage dated 23 April 2026. Contrast ratios calculated to WCAG 2.1 relative luminance. Click any swatch to copy its value.</p>
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  (function () {
+    var toast = document.getElementById('toast');
+    var timer;
+    function show(msg) {
+      toast.textContent = msg;
+      toast.classList.add('on');
+      clearTimeout(timer);
+      timer = setTimeout(function () { toast.classList.remove('on'); }, 1600);
+    }
+    document.querySelectorAll('.sw').forEach(function (sw) {
+      sw.addEventListener('click', function () {
+        var val = sw.getAttribute('data-hex') || '';
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(val).then(
+              function () { show('Copied ' + val); },
+              function () { show(val); }
+            );
+            return;
+          }
+        } catch (e) { /* clipboard unavailable in this context */ }
+        show(val);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
