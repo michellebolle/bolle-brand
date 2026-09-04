@@ -325,7 +325,7 @@
     <h1>Brand Guide</h1>
     <p class="tag">Honouring tradition. Creating the future.</p>
     <div class="cover-meta">
-      <span>Version <b>2.4</b></span>
+      <span>Version <b>2.5</b></span>
       <span>Issued <b>4 September 2026</b></span>
       <span>Owner <b>Michelle Diaz</b></span>
       <span>Supersedes <b>v1, October 2025</b></span>
@@ -603,10 +603,19 @@
       <div class="sw">
         <div class="chip" style="background:#C9AA3A"></div>
         <div class="meta">
-          <div class="nm">Gold: display</div>
+          <div class="nm">Gold: display / dark</div>
           <div class="hx hex">#C9AA3A</div>
-          <div class="rl">Display italics inside a heading, on ink or ink panel only. Never on a light ground. See the rule below.</div>
+          <div class="rl">Display italics in a heading, on ink or ink panel. Never on a light ground at any size. See the ladder below.</div>
           <div class="tk">--bolle-gold-display &middot; to be added</div>
+        </div>
+      </div>
+      <div class="sw">
+        <div class="chip" style="background:#A3892D"></div>
+        <div class="meta">
+          <div class="nm">Gold: display / light</div>
+          <div class="hx hex">#A3892D</div>
+          <div class="rl">Display italics at 24px and up, on cream or white. The same hue and saturation as its dark-ground partner, ten points darker.</div>
+          <div class="tk">--bolle-gold-display-light &middot; to be added</div>
         </div>
       </div>
       <div class="sw">
@@ -629,47 +638,61 @@
       </div>
     </div>
 
-    <h3>Display gold, dark grounds only</h3>
-    <p><strong>Gold: display <span class="hex">#C9AA3A</span></strong> is the brightest gold in the palette and the most restricted. It exists for one job: an emphasised word or phrase set in Georgia italic inside a heading, on a dark ground. On ink it runs at <b>7.91:1</b>. On cream it runs at <b>2.16:1</b> and carries nothing.</p>
+    <h3>Gold text: the size and ground ladder</h3>
+    <p>Gold as <strong>text</strong> is governed by 2 things: the ground it sits on, and how big it is. WCAG asks 4.5:1 of text under 24px and 3:1 of text at 24px and above. That gives 3 rungs, and the whole gold family fits them.</p>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:8px;overflow:hidden;margin:18px 0 20px;border:1px solid var(--rule)">
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Ground</th><th>Size</th><th>Use</th><th>Bar</th><th>Worst light ground</th></tr></thead>
+        <tbody>
+          <tr><td><span class="dot" style="background:#111820"></span><strong>Ink</strong> or ink panel</td><td>Any</td><td><span class="dot" style="background:#C9AA3A"></span><strong>Display / dark</strong> <span class="hex">#C9AA3A</span></td><td class="n">3:1</td><td class="n">7.10 on ink panel</td></tr>
+          <tr><td><span class="dot" style="background:#FFF9F5"></span><strong>Cream</strong> or white</td><td>24px and up</td><td><span class="dot" style="background:#A3892D"></span><strong>Display / light</strong> <span class="hex">#A3892D</span></td><td class="n">3:1</td><td class="n">3.26 on cream</td></tr>
+          <tr><td><span class="dot" style="background:#FFF9F5"></span>Any light ground</td><td>Under 24px</td><td><span class="dot" style="background:#7C5F26"></span><strong>Gold base</strong> <span class="hex">#7C5F26</span></td><td class="n">4.5:1</td><td class="n">5.26 on warm stone</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:8px;overflow:hidden;margin:20px 0;border:1px solid var(--rule)">
       <div style="background:#111820;padding:30px 26px;display:flex;flex-direction:column;gap:9px;justify-content:center">
         <span style="font-family:Georgia,serif;font-size:clamp(22px,3vw,31px);line-height:1.16;color:#FFF9F5">Why is it so hard to make <em style="font-style:italic;color:#C9AA3A">non-alcoholic wine</em> that actually tastes like wine?</span>
-        <span style="font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,249,245,.62);font-weight:600">Correct &middot; 7.91:1 on ink</span>
+        <span style="font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,249,245,.62);font-weight:600">Display / dark &middot; 7.91:1</span>
       </div>
       <div style="background:#FFF9F5;padding:30px 26px;display:flex;flex-direction:column;gap:9px;justify-content:center">
-        <span style="font-family:Georgia,serif;font-size:clamp(22px,3vw,31px);line-height:1.16;color:#111820">Why is it so hard to make <em style="font-style:italic;color:#C9AA3A">non-alcoholic wine</em> that actually tastes like wine?</span>
-        <span style="font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:#8C2F2F;font-weight:600">Wrong &middot; 2.16:1 on cream. Use #7C5F26</span>
+        <span style="font-family:Georgia,serif;font-size:clamp(22px,3vw,31px);line-height:1.16;color:#111820">Non-alcoholic wine has a <em style="font-style:italic;color:#A3892D">science problem</em></span>
+        <span style="font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:#7C5F26;font-weight:600">Display / light &middot; 3.26:1</span>
       </div>
     </div>
 
+    <h4>The ladder has a floor, not a ceiling</h4>
+    <p><strong>There is no size at which <span class="hex">#C9AA3A</span> works on a light ground.</strong> Going above 24px lowers the bar from 4.5:1 to 3:1 and stops. It sits at 2.16:1 on cream, under even the relaxed bar, so a bigger heading does not rescue it. That is the whole reason the light rung exists as a separate value.</p>
+
     <div class="rules">
       <div class="rcard do">
-        <h4>Only</h4>
+        <h4>Always</h4>
         <ul>
-          <li>Display italics inside an <b>h1 or h2</b>, at 30px and above</li>
-          <li>On <b>BOLLE Black</b> <span class="hex">#111820</span> or <b>ink panel</b> <span class="hex">#1A222C</span></li>
-          <li>One word or phrase, not a whole heading</li>
+          <li>Pick the rung by <b>ground first, then size</b></li>
+          <li>Keep display gold to an <b>emphasised word or phrase</b>, not a whole heading</li>
+          <li>On <b>warm stone</b>, use gold base at any size. Display / light lands on exactly 3.00 there, which is passing by nothing</li>
         </ul>
       </div>
       <div class="rcard dont">
         <h4>Never</h4>
         <ul>
-          <li>On <b>any light ground.</b> Use gold base <span class="hex">#7C5F26</span> there</li>
-          <li>In <b>body copy</b>, at any size, on any ground</li>
-          <li>On <b>buttons, chips, borders, rules or icons.</b> It is a type colour only</li>
-          <li>In <b>print.</b> It has no CMYK build and is screen-only</li>
+          <li>Put <b>#C9AA3A</b> on a light ground, at any size</li>
+          <li>Use either display value in <b>body copy</b></li>
+          <li>Use them on <b>buttons, chips, borders, rules or icons.</b> They are type colours</li>
+          <li>Use them in <b>print.</b> Neither has a CMYK build</li>
         </ul>
       </div>
     </div>
 
     <div class="note">
-      <p><strong>The light-ground partner is gold base <span class="hex">#7C5F26</span>.</strong> Same job, different ground, at 5.71:1 on cream. That pairing follows the rule the gold ramp already uses: <span class="hex">#7C5F26</span> is its light-ground ink and <span class="hex">#D2AD75</span> its dark-ground ink. Display gold does not replace either. It is the dark-ground value for one narrow use.</p>
-      <p><strong>This does not un-retire Champagne Gold.</strong> Display gold sits at hue 47&deg; and lightness 51%, and lives only on dark. <span class="hex">#887711</span> sat at hue 51&deg; and lightness 30% and was used as a general-purpose accent on light grounds. That value stays retired.</p>
+      <p><strong>Why these 2 values and not others.</strong> <span class="hex">#A3892D</span> is the lightest colour at the dark rung's own hue and saturation, 47&deg; and 57%, that clears 3:1 on every light ground we use. It was solved for, not chosen: anything lighter fails. Only lightness moves between the pair, 51% down to 41%, which is why they read as one gold in 2 weights rather than 2 different golds.</p>
+      <p><strong>This does not un-retire Champagne Gold.</strong> <span class="hex">#887711</span> sat at hue 51&deg; and lightness 30% and was a general-purpose accent. Neither display value replaces it, and it stays retired.</p>
     </div>
 
     <h4>The dark band pattern</h4>
-    <p>Display gold needs a dark ground to sit on, so a page that wants it puts its opening section on ink and returns to the light ground below. Full bleed, cream heading, display gold on the emphasised phrase, body copy at 72% cream. One band per page, at the top. A page with 4 dark bands is a striped page, not a branded one.</p>
+    <p>The dark rung needs a dark ground to sit on, so a page that wants it puts its opening section on ink and returns to the light ground below. Full bleed, cream heading, display gold on the emphasised phrase, body copy at 72% cream. One band per page, at the top. A page with 4 dark bands is a striped page, not a branded one.</p>
 
     <h3>Held in reserve</h3>
     <p>Rose gold and deep burgundy are part of the palette but not yet in use on either storefront. They are cleared for site and packaging work. Measured against the gold scale, they are its rose-red mirror at matching lightness. That gives the palette 2 axes: hue and lightness.</p>
@@ -704,11 +727,13 @@
           <tr><td><span class="dot" style="background:#111820"></span>Ink on light gold</td><td class="n">8.49</td><td>Everything</td></tr>
           <tr><td><span class="dot" style="background:#FFFFFF"></span>White on gold base</td><td class="n">5.96</td><td>Everything</td></tr>
           <tr><td><span class="dot" style="background:#e6b6af"></span>Rose gold on burgundy</td><td class="n">5.36</td><td>Everything. The varietal pairing.</td></tr>
-          <tr><td><span class="dot" style="background:#C9AA3A"></span>Display gold on ink</td><td class="n">7.91</td><td>Display italics. Its only use.</td></tr>
-          <tr><td><span class="dot" style="background:#C9AA3A"></span>Display gold on ink panel</td><td class="n">7.10</td><td>Display italics.</td></tr>
+          <tr><td><span class="dot" style="background:#C9AA3A"></span>Display / dark on ink</td><td class="n">7.91</td><td>Display italics. Its only use.</td></tr>
+          <tr><td><span class="dot" style="background:#C9AA3A"></span>Display / dark on ink panel</td><td class="n">7.10</td><td>Display italics.</td></tr>
           <tr><td><span class="dot" style="background:#7C5F26"></span>Gold base as text on ink</td><td class="n">3.00</td><td>Display sizes only</td></tr>
-          <tr><td><span class="dot" style="background:#C9AA3A"></span>Display gold on cream</td><td class="n">2.16</td><td><span class="bad">Nothing.</span> Display gold is dark-ground only.</td></tr>
-          <tr><td><span class="dot" style="background:#C9AA3A"></span>Display gold on warm stone</td><td class="n">1.99</td><td><span class="bad">Nothing.</span> Use gold base.</td></tr>
+          <tr><td><span class="dot" style="background:#A3892D"></span>Display / light on cream</td><td class="n">3.26</td><td>Display italics at 24px and up.</td></tr>
+          <tr><td><span class="dot" style="background:#A3892D"></span>Display / light on warm stone</td><td class="n">3.00</td><td>Passing by nothing. Prefer gold base on stone.</td></tr>
+          <tr><td><span class="dot" style="background:#C9AA3A"></span>Display / dark on cream</td><td class="n">2.16</td><td><span class="bad">Nothing, at any size.</span> Use display / light.</td></tr>
+          <tr><td><span class="dot" style="background:#C9AA3A"></span>Display / dark on warm stone</td><td class="n">1.99</td><td><span class="bad">Nothing.</span> Use gold base.</td></tr>
           <tr><td><span class="dot" style="background:#FFFFFF"></span>White on light gold</td><td class="n">2.11</td><td><span class="bad">Nothing.</span> Use ink on light gold.</td></tr>
           <tr><td><span class="dot" style="background:#722f37"></span>Burgundy on ink</td><td class="n">1.85</td><td><span class="bad">Nothing.</span> Burgundy is light-ground only.</td></tr>
           <tr><td><span class="dot" style="background:#e6b6af"></span>Rose gold on cream</td><td class="n">1.72</td><td><span class="bad">Nothing.</span> Rose gold is dark-ground only.</td></tr>
@@ -1181,6 +1206,21 @@
     <h4>Version history</h4>
     <div class="vh">
       <div class="vh-row">
+        <div class="vh-v">v2.5<br><span style="font-weight:400;color:var(--ink-soft);font-size:11.5px">4 Sep 2026</span></div>
+        <div class="vh-d">
+          <b>Display gold becomes a ladder rather than a ban.</b>
+          <ul>
+            <li>Added <span class="hex">#A3892D</span> as <b>Gold: display / light</b>, and renamed <span class="hex">#C9AA3A</span> to <b>Gold: display / dark</b>. One gold in 2 weights, not 2 golds</li>
+            <li>v2.3 said only where display gold could not go. Section 05 now says what to use at each rung: <span class="hex">#C9AA3A</span> on ink, <span class="hex">#A3892D</span> on light grounds at 24px and up, <span class="hex">#7C5F26</span> on light grounds below 24px</li>
+            <li><span class="hex">#A3892D</span> was solved for, not picked. It is the lightest colour at hue 47&deg; and saturation 57% that clears 3:1 on every light ground we use</li>
+            <li>Recorded that the ladder has a floor and no ceiling: no size makes <span class="hex">#C9AA3A</span> work on cream, because 24px+ only lowers the bar to 3:1 and it sits at 2.16</li>
+            <li>Flagged warm stone as the exception. Display / light lands on exactly 3.00 there, so gold base is preferred on that ground at any size</li>
+            <li>Token export gains <span class="hex">#A3892D</span> as <code>gold-display-light</code>. <code>gold-display</code> keeps its name and value</li>
+            <li>Prompted by the science page, where 7 display italics at 44.8px on cream were spending 5.71:1 against a 3:1 requirement and reading brown as a result</li>
+          </ul>
+        </div>
+      </div>
+      <div class="vh-row">
         <div class="vh-v">v2.4<br><span style="font-weight:400;color:var(--ink-soft);font-size:11.5px">4 Sep 2026</span></div>
         <div class="vh-d">
           <b>Lighter golds released for black merchandise.</b>
@@ -1269,7 +1309,7 @@
   </section>
 
   <footer>
-    <p>BOLLE Brand Guide v2.4 · Issued 4 September 2026 · Bolle Drinks Limited (UK) · Bolle Drinks Corporation (US). Colour, typography and button values verified against the rendered output of bolledrinks.com and bolledrinks.co.uk on 26 August 2026. Contrast ratios calculated to WCAG 2.1 relative luminance. Product range, formats and prices read from both storefronts on 27 August 2026. Supersedes BOLLE Brand Definition v1, 16 August 2025.</p>
+    <p>BOLLE Brand Guide v2.5 · Issued 4 September 2026 · Bolle Drinks Limited (UK) · Bolle Drinks Corporation (US). Colour, typography and button values verified against the rendered output of bolledrinks.com and bolledrinks.co.uk on 26 August 2026. Contrast ratios calculated to WCAG 2.1 relative luminance. Product range, formats and prices read from both storefronts on 27 August 2026. Supersedes BOLLE Brand Definition v1, 16 August 2025.</p>
   </footer>
 </div>
 
@@ -1296,7 +1336,8 @@
     ['gold-light',         '#D2AD75', 'Newsletter button, cart badge, type on dark'],
     ['gold-pale',          '#EFDCBD', 'Light end of the decorative gradient'],
     ['gold-mid',           '#9D7B3A', 'Decorative gradient dark end, and the single logo gold'],
-    ['gold-display',       '#C9AA3A', 'Display italics in a heading. Dark grounds only, never light, never body'],
+    ['gold-display',       '#C9AA3A', 'Display italics in a heading, on ink or ink panel. Never a light ground, at any size'],
+    ['gold-display-light', '#A3892D', 'Display italics at 24px+ on cream or white. Same hue as gold-display, ten points darker'],
     ['rose-gold',          '#E6B6AF', 'Held in reserve. Dark grounds only'],
     ['deep-burgundy',      '#722F37', 'Held in reserve. Light grounds only']
   ];
