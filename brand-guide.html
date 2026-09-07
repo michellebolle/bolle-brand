@@ -314,6 +314,28 @@
     display: flex; gap: 8px; align-items: baseline;
   }
 
+  /* ---------- confidentiality notice ---------- */
+  .conf {
+    margin: 26px 0 0; padding: 20px 22px; border-radius: 2px;
+    background: var(--surface); border: 1px solid var(--accent);
+    border-left-width: 3px;
+  }
+  .conf h3 {
+    margin: 0 0 10px; font-family: Montserrat, Arial, sans-serif;
+    font-size: 12px; font-weight: 600; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .conf p { margin: 0 0 10px; font-size: 13.5px; max-width: 82ch; }
+  .conf p:last-child { margin-bottom: 0; }
+  .conf ul { margin: 10px 0 12px; padding: 0; list-style: none; display: grid; gap: 7px; max-width: 82ch; }
+  .conf li { position: relative; padding-left: 18px; font-size: 13.5px; color: var(--ink-mid); line-height: 1.5; }
+  .conf li::before {
+    content: ""; position: absolute; left: 1px; top: 8px; width: 7px; height: 1.5px;
+    background: var(--accent);
+  }
+  .conf li b { color: var(--ink); font-weight: 600; }
+  .conf .sig { font-size: 12.5px; color: var(--ink-soft); }
+
   footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--ink); }
   footer p { font-size: 12px; color: var(--ink-soft); max-width: 80ch; }
 </style>
@@ -325,12 +347,26 @@
     <h1>Brand Guide</h1>
     <p class="tag">Honouring tradition. Creating the future.</p>
     <div class="cover-meta">
-      <span>Version <b>2.6</b></span>
+      <span>Version <b>2.7</b></span>
       <span>Issued <b>4 September 2026</b></span>
       <span>Owner <b>Michelle Diaz</b></span>
       <span>Supersedes <b>v1, October 2025</b></span>
     </div>
   </header>
+
+  <div class="conf">
+    <h3>Confidential &middot; read before using this guide</h3>
+    <p>This document is <strong>BOLLE's confidential business information</strong>. It is shared with named individuals working on BOLLE's behalf, for that work only. If you have received it and are not one of those people, please tell us and delete it.</p>
+    <ul>
+      <li><b>Do not share it on.</b> Not with other clients, not with subcontractors, not in a portfolio, not in a public link, and not uploaded to a third-party tool that trains on what you give it. If your work needs a subcontractor to see it, ask us first.</li>
+      <li><b>Sections 09, 10 and 11 are the sensitive ones.</b> Audience, market position, prices and channel strategy. Several of BOLLE's stockists also sell competing brands. This material must not reach them.</li>
+      <li><b>Some of it is unfinished.</b> Anything marked "to confirm", "not yet ratified" or "proposal" is not approved and must not appear in customer-facing work. Section 12 lists what is still open.</li>
+      <li><b>It changes.</b> Check the version on the cover against the live copy before you rely on it. Do not work from a downloaded PDF or a screenshot.</li>
+      <li><b>The logo files in section 07 are for BOLLE work only.</b> Downloading them is not a licence to use the marks for anything else.</li>
+      <li><b>Work you produce from this guide belongs to BOLLE</b> on the terms of your engagement. Please do not reuse BOLLE-specific assets, textures or layouts for other clients.</li>
+    </ul>
+    <p class="sig">Questions, or anything you are unsure about: Michelle Diaz, michelle@bolledrinks.com. Bolle Drinks Limited (UK) &middot; Bolle Drinks Corporation (US).</p>
+  </div>
 
   <nav class="contents" aria-label="Contents">
     <ol>
@@ -1227,6 +1263,20 @@
 
     <h4>Version history</h4>
     <div class="vh">
+      <div class="vh-row">
+        <div class="vh-v">v2.7<br><span style="font-weight:400;color:var(--ink-soft);font-size:11.5px">4 Sep 2026</span></div>
+        <div class="vh-d">
+          <b>Confidentiality notice added to the cover.</b>
+          <ul>
+            <li>The guide is now routinely sent to freelance designers and marketing people before any engagement is signed. The notice tells them what they are holding and what not to do with it</li>
+            <li>Names sections 09, 10 and 11 as the sensitive ones, and says plainly that several BOLLE stockists also sell competing brands</li>
+            <li>Warns against uploading it to third-party tools that train on what they are given</li>
+            <li>Flags that "to confirm", "not yet ratified" and "proposal" markers mean not approved for customer-facing work</li>
+            <li>Says to check the cover version against the live copy rather than working from a downloaded PDF</li>
+            <li><b>A notice is not an NDA.</b> It sets expectations and records that someone was told; it is not a contract. A short confidentiality clause still belongs in the engagement email when work starts</li>
+          </ul>
+        </div>
+      </div>
       <div class="vh-row">
         <div class="vh-v">v2.6<br><span style="font-weight:400;color:var(--ink-soft);font-size:11.5px">4 Sep 2026</span></div>
         <div class="vh-d">
