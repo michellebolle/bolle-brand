@@ -90,9 +90,51 @@ def build() -> str:
 """
 
 
+def assert_versions_agree(html: str) -> str:
+    """Refuse to write when the 4 version surfaces disagree. See FINDINGS.md, BG-01.
+
+    The guide carries its version in 4 places: the cover meta, the footer line, the
+    meta description and the og description. Three of those are derived from the
+    cover by this script, so they cannot drift from each other, and that is exactly
+    why the drift went unnoticed: every generated surface agreed while the hand
+    authored footer sat a version behind for 3 days on a live document. Read all 4
+    back out of the finished document and compare them, rather than trusting the
+    inputs that produced it.
+    """
+    # Version numbers are matched as digits and dots with a lookahead, because the
+    # meta strings end in a full stop and a greedy [\d.]+ swallows it. The footer is
+    # located inside its own element first: the same string appears earlier in the
+    # head, so a document wide search silently reads the meta tag twice and reports
+    # the footer as agreeing when it does not.
+    VER = r"(\d+(?:\.\d+)+)(?=[.\s<])"
+    footer = re.search(r"<footer>.*?</footer>", html, re.S)
+    if not footer:
+        sys.exit("build: no <footer> element found. Refusing to write.")
+    found = {
+        "cover": re.search(r"<span>Version <b>" + VER + r"</b></span>", html),
+        "footer": re.search(r"BOLLE Brand Guide v" + VER, footer.group(0)),
+        "meta description": re.search(r'name="description" content="BOLLE Brand Guide v' + VER, html),
+        "og:description": re.search(r'og:description" content="BOLLE Brand Guide v' + VER, html),
+    }
+    missing = [k for k, m in found.items() if not m]
+    if missing:
+        sys.exit(f"build: no version string found on: {', '.join(missing)}. Refusing to write.")
+    values = {k: m.group(1) for k, m in found.items()}
+    if len(set(values.values())) != 1:
+        lines = "\n".join(f"  {k:<18} v{v}" for k, v in values.items())
+        sys.exit(
+            "build: the version surfaces disagree, so nothing was written.\n"
+            f"{lines}\n"
+            "A version bump has to name every surface carrying the number. The footer in\n"
+            "brand-guide.html is authored by hand and is the one that drifts."
+        )
+    return next(iter(values.values()))
+
+
 if __name__ == "__main__":
     html = build()
+    version = assert_versions_agree(html)
     with open(OUT, "w", encoding="utf-8", newline="") as fh:
         fh.write(html)
-    v = re.search(r"Version <b>([\d.]+)</b>", html).group(1)
-    print(f"built {OUT.name} from {SRC.name}: v{v}, {len(html.encode('utf-8'))} bytes")
+    print(f"built {OUT.name} from {SRC.name}: v{version}, {len(html.encode('utf-8'))} bytes")
+    print("  all 4 version surfaces agree: cover, footer, meta description, og:description")
