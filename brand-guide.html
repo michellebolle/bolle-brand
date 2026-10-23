@@ -384,6 +384,28 @@ details.all .pick .stage img { max-height: 56px; }
 .toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
 @media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
 
+
+/* ---------- print: the portal's Download as PDF prints this page ---------- */
+.print-only { display: none; }
+@media print {
+  .top, .skip, .roles, .jobs, .viewchip, .results, .toast, .index, #check, .finder, .subgrid, .exports,
+  #cl-filter, #wn-tabs, #wn-panel, .btn, .linkbtn, details.all > summary, body > nav.sitenav { display: none !important; }
+  .print-only { display: block !important; }
+  .sec[hidden] { display: block !important; }
+  .band .inner { display: block; padding-block: 28px; }
+  .body { display: block; padding-block: 16px 0; }
+  .sec { margin-bottom: 36px; }
+  .sechead, main h3, main h4 { break-after: avoid; }
+  tr, .defs > div, li, .pick, .sw, .note, .rcard, .pricebox { break-inside: avoid; }
+  .print-wines .wine { display: block; } .print-wines .pricebox { margin-top: 12px; }
+  .tool { box-shadow: none; padding: 0; background: none; }
+  .print-wines .wine { margin: 0 0 28px; padding-top: 18px; border-top: 1px solid var(--rule); }
+  .scroll { overflow: visible; }
+  table { min-width: 0; }
+  a { color: inherit; text-decoration: none; }
+  details.all { border: 0; padding: 0; }
+}
+
 /* ---------- responsive ---------- */
 @media (max-width: 1023px) {
   .body { grid-template-columns: minmax(0, 1fr); gap: 0; }
@@ -435,7 +457,7 @@ details.all .pick .stage img { max-height: 56px; }
       <p class="tag">Honouring Tradition. Creating the Future.</p>
       <p class="lede">How BOLLE looks, sounds and what it may claim. Search it, or start from what you need to do. Every rule shows who decided it and when.</p>
       <div class="meta">
-        <span>Version <b>3.3</b></span>
+        <span>Version <b>3.4</b></span>
         <span>Issued <b>23 October 2026</b></span>
         <span>Owner <b>Michelle Diaz</b></span>
       </div>
@@ -1443,6 +1465,16 @@ details.all .pick .stage img { max-height: 56px; }
     <h4>Version history</h4>
     <div class="vh">
       <div class="vh-row">
+        <div class="vh-v">v3.4<br><span style="font-weight:400;color:var(--ink-soft);font-size:11.5px">23 Oct 2026</span></div>
+        <div class="vh-d">
+          <b>One guide in both places, and a print layout.</b>
+          <ul>
+            <li>The copy on MAISON BOLLE (Growth, Brand guide) now matches this one. It had stayed on v2.9 while this page moved to v3.3</li>
+            <li>Download as PDF prints the whole guide: every section whatever view is chosen, every wine's fact sheet and all 29 logo files, without the search bar, the tools' controls or the copy checker</li>
+          </ul>
+        </div>
+      </div>
+      <div class="vh-row">
         <div class="vh-v">v3.3<br><span style="font-weight:400;color:var(--ink-soft);font-size:11.5px">23 Oct 2026</span></div>
         <div class="vh-d">
           <b>DESIGN.md approved, and the bubble icon in the browser tab.</b>
@@ -1659,7 +1691,7 @@ details.all .pick .stage img { max-height: 56px; }
   <div class="inner">
     <div><img data-src="cover|cream" alt="BOLLE" width="112" height="34"><p><b>Honouring Tradition. Creating the Future.</b></p></div>
     <div>
-      <p>BOLLE Brand Guide v3.3 &middot; Issued 23 October 2026 &middot; Bolle Drinks Limited (UK) &middot; Bolle Drinks Corporation (US). Colour, typography and button values verified against the rendered output of bolledrinks.com and bolledrinks.co.uk on 26 August 2026. Contrast ratios calculated to WCAG 2.1 relative luminance. Product range, formats and prices read from both storefronts on 27 August 2026. Supersedes BOLLE Brand Definition v1, 16 August 2025.</p>
+      <p>BOLLE Brand Guide v3.4 &middot; Issued 23 October 2026 &middot; Bolle Drinks Limited (UK) &middot; Bolle Drinks Corporation (US). Colour, typography and button values verified against the rendered output of bolledrinks.com and bolledrinks.co.uk on 26 August 2026. Contrast ratios calculated to WCAG 2.1 relative luminance. Product range, formats and prices read from both storefronts on 27 August 2026. Supersedes BOLLE Brand Definition v1, 16 August 2025.</p>
       <p><b>The copy checker covers the rules a machine can check.</b> It does not replace a read by Gary or Michelle. Role views only hide what you do not need: everything here stays confidential.</p>
     </div>
   </div>
@@ -1984,15 +2016,28 @@ var DESIGNMD = "---\nversion: alpha\nname: BOLLE\ndescription: A cellar-door tas
       var copyBtn = r[0] === 'Notes to use' ? ' <button class="linkbtn" type="button" data-copynotes>Copy notes</button>' : '';
       return '<div><div class="k">' + esc(r[0]) + '</div><div class="v">' + esc(r[1]) + copyBtn + '</div></div>';
     }).join('');
+    $('#wn-panel').innerHTML = wineHTML(w, rows, usOnly);
+    var nb = $('[data-copynotes]', $('#wn-panel'));
+    if (nb) { var notes = w.rows.filter(function (r) { return r[0] === 'Notes to use'; })[0][1]; nb.addEventListener('click', function () { copy(notes, 'the tasting notes'); }); }
+  }
+  function wineHTML(w, rows, usOnly) {
     var list = function (a) { return a.length ? '<ul>' + a.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' : '<ul><li>Not listed</li></ul>'; };
-    $('#wn-panel').innerHTML = '<div class="wine"><div><h4 class="wn">' + esc(w.name) + '</h4>' + (w.alias ? '<p style="margin:0 0 8px;color:var(--ink-soft);font-size:14px">' + esc(w.alias) + '</p>' : '') +
+    return '<div class="wine"><div><h4 class="wn">' + esc(w.name) + '</h4>' + (w.alias ? '<p style="margin:0 0 8px;color:var(--ink-soft);font-size:14px">' + esc(w.alias) + '</p>' : '') +
       '<div class="markets"><span class="mk' + (usOnly ? ' off' : '') + '">UK</span><span class="mk">US</span>' + (usOnly ? '<span class="mk" style="background:var(--warn-bg);color:var(--warn)">US only: keep out of UK and EU material</span>' : '') + '</div>' +
       '<div class="defs">' + rows + '</div></div>' +
       '<aside class="pricebox"><h5>UK formats and prices</h5>' + list(w.uk) + '<h5>US formats and prices</h5>' + list(w.us) +
       '<p>Read from both storefronts on 27 August 2026. Copy about a stockist prints no price of ours.</p></aside></div>';
-    var nb = $('[data-copynotes]', $('#wn-panel'));
-    if (nb) { var notes = w.rows.filter(function (r) { return r[0] === 'Notes to use'; })[0][1]; nb.addEventListener('click', function () { copy(notes, 'the tasting notes'); }); }
   }
+  /* print: every wine, not just the open tab */
+  (function () {
+    var box = document.createElement('div'); box.className = 'print-only print-wines';
+    box.innerHTML = WINES.map(function (w) {
+      var usOnly = /US only/.test((w.rows[0] && w.rows[0][1]) || '');
+      var rows = w.rows.map(function (r) { return '<div><div class="k">' + esc(r[0]) + '</div><div class="v">' + esc(r[1]) + '</div></div>'; }).join('');
+      return wineHTML(w, rows, usOnly);
+    }).join('');
+    $('#wn-panel').parentNode.appendChild(box);
+  })();
   var tabs = $('#wn-tabs');
   WINES.forEach(function (w, i) {
     var b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.setAttribute('role', 'tab'); b.textContent = w.name;
@@ -2319,6 +2364,9 @@ var DESIGNMD = "---\nversion: alpha\nname: BOLLE\ndescription: A cellar-door tas
   /* open the view named in the link */
   var h = (location.hash || '').slice(1);
   if (/^[A-Za-z0-9._~-]+$/.test(h)) { var target = document.getElementById(h); if (target) setTimeout(function () { reveal(target); }, 60); }
+  var allDet = $('details.all'), wasOpen = false;
+  window.addEventListener('beforeprint', function () { wasOpen = allDet.open; allDet.open = true; });
+  window.addEventListener('afterprint', function () { allDet.open = wasOpen; });
 })();
 
 </script>
